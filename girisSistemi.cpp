@@ -39,8 +39,19 @@ std::string enter() {
 	return pass_;
 }
 
+std::string encode(std::string a) {
+	std::string b;
+	b=a;
+	for(int i=0;i<a.size();i++) {
+		b[i] = b[i] + 2;
+	}
+
+	return b;
+}
 
 bool access() {
+	std::string encrypt;
+
 	std::ifstream oku("password.txt");
 	if(!oku.is_open()) {
 		std::ofstream yaz;
@@ -49,7 +60,8 @@ bool access() {
 		system("clear");
 		std::cout<<"\nEnter new password: ";
 		passw = enter();
-		yaz<<passw<<"\n";
+		encrypt = encode(passw);
+		yaz<<encrypt<<"\n";
 		std::cout<<"\nSaved new password. Please restart program\n\n";
 		yaz.close();
 		exit(1);
@@ -64,7 +76,7 @@ bool access() {
 				std::ifstream oku("password.txt");
 				std::string satir;
 				oku>>satir;
-				if(satir == passwd) {
+				if(satir == encode(passwd)) {
 					std::cout<<"\n\e[93mAccess granted.\n";
 					return true;
 				}
