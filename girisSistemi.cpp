@@ -19,7 +19,7 @@ int yildiz() {
 
 std::string enter() {
 	char sifre[30];
-	std::cout<<"\nEnter password: ";
+	std::cout<<"\n\e[92mEnter password: ";
 	int i=0;
 	while(1) {
 		sifre[i] = yildiz();
@@ -50,31 +50,28 @@ std::string encode(std::string a) {
 }
 
 bool access() {
-	std::string encrypt;
-
-	std::ifstream oku("password.txt");
-	if(!oku.is_open()) {
-		std::ofstream yaz;
-		yaz.open("password.txt");
+	std::ifstream reads("password.txt");
+	if(!reads.is_open()) {
+		std::ofstream writes;
+		writes.open("password.txt");
 		std::string passw;
 		system("clear");
-		std::cout<<"\nEnter new password: ";
+		std::cout<<"\n\e[92mEnter new password: ";
 		passw = enter();
-		encrypt = encode(passw);
-		yaz<<encrypt<<"\n";
+		writes<<encode(passw)<<std::endl;
 		std::cout<<"\nSaved new password. Please restart program\n\n";
-		yaz.close();
+		writes.close();
 		exit(0);
 	} else {
 		int kez=3;
 		while(kez--) {
 			std::string passwd;
 			passwd = enter();
-			while(!oku.eof()) {
-				std::ifstream oku("password.txt");
-				std::string satir;
-				oku>>satir;
-				if(satir == encode(passwd)) {
+			while(!reads.eof()) {
+				std::ifstream reads("password.txt");
+				std::string line;
+				reads>>line;
+				if(line == encode(passwd)) {
 					std::cout<<"\n\e[93mAccess granted.\n";
 					return true;
 				}
