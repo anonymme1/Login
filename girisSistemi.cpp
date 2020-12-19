@@ -64,10 +64,8 @@ bool access() {
 		yaz<<encrypt<<"\n";
 		std::cout<<"\nSaved new password. Please restart program\n\n";
 		yaz.close();
-		exit(1);
-	}
-
-	if(oku.is_open()) {
+		exit(0);
+	} else {
 		int kez=3;
 		while(kez--) {
 			std::string passwd;
@@ -92,8 +90,8 @@ bool access() {
 
 void banner() {
 	std::cout<<"\n\n\t\e[94m====================================\n";
-	std::cout<<"\t\e[94m==   \e[91mauthor: anonymme1            \e[94m==\n";
-	std::cout<<"\t\e[94m==   \e[91mgithub: github.com/anonymme1 \e[94m==\n";
+	std::cout<<"\t\e[94m==   \e[91mauthor: ziyaArslan1            \e[94m==\n";
+	std::cout<<"\t\e[94m==   \e[91mgithub: github.com/ziyaArslan1 \e[94m==\n";
 	std::cout<<"\t\e[94m====================================\n\n";
 }
 
